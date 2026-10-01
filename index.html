@@ -24,7 +24,7 @@ layout: default
   <h3 class="title">{{ r.title }}</h3>
   <p>{{ r.summary }}</p>
   <figure class="figure">
-    <img src="{{ '/assets/img/pipeline.svg' | relative_url }}" alt="Research pipeline: Linux host, detected changes, machine-aware local LLM with machine context, classified as user change or attacker persistence">
+    <img loading="lazy" src="{{ '/assets/img/pipeline.svg' | relative_url }}" alt="Research pipeline: Linux host, detected changes, machine-aware local LLM with machine context, classified as user change or attacker persistence">
   </figure>
 
   <h3>The problem in one table</h3>
@@ -69,6 +69,7 @@ layout: default
     <article class="card">
       <h3>{% if p.url %}<a href="{{ p.url }}">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}</h3>
       <p>{{ p.summary }}</p>
+      {% if p.url %}<p class="more"><a href="{{ p.url }}">View on GitHub →</a></p>{% endif %}
       <p class="tags">{% for t in p.tags %}<span>{{ t }}</span>{% endfor %}</p>
     </article>
   {% endfor %}

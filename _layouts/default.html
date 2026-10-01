@@ -8,6 +8,7 @@
   {% seo %}
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
   <header class="nav">
     <div class="wrap nav-inner">
       <a class="brand" href="{{ '/' | relative_url }}">Samuel Schwertfeger</a>
@@ -20,17 +21,18 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
     {{ content }}
   </main>
 
   <footer>
     <div class="wrap">
-      <p>
+      <p class="footer-links">
         <a href="mailto:{{ site.email }}">{{ site.email }}</a> ·
         <a href="https://github.com/{{ site.github }}">GitHub</a>
       </p>
       <p class="muted small">Views expressed here are my own and do not represent the U.S. Army or the Department of Defense.</p>
+      <p class="muted small">Last updated {{ site.time | date: "%B %Y" }}</p>
     </div>
   </footer>
 </body>
