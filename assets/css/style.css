@@ -94,6 +94,7 @@ footer p { margin: 4px 0; }
   .hero-inner { flex-direction: column; text-align: center; }
   .buttons { justify-content: center; }
   .hero h1 { font-size: 34px; }
-  .nav nav a { margin-left: 14px; }
+  .nav-inner { flex-wrap: wrap; height: auto; padding-top: 10px; padding-bottom: 10px; gap: 4px 0; }
+  .nav nav a { margin: 0 14px 0 0; font-size: 14px; }
   .brand { font-size: 15px; }
 }
