@@ -9,7 +9,6 @@
       try { t = localStorage.getItem('theme'); } catch (e) {}
       if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', t);
-      document.documentElement.classList.add('js');
     })();
   </script>
   <meta name="theme-color" content="#0A1F3C">
@@ -23,7 +22,7 @@
   <a class="skip" href="#main">Skip to content</a>
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="brand" href="{{ '/' | relative_url }}" aria-label="Samuel Schwertfeger, home">
+      <a class="brand" href="{{ '/' | relative_url }}">
         <span class="mark" aria-hidden="true">SS</span><span class="brand-name">Samuel Schwertfeger</span>
       </a>
       <nav aria-label="Main">

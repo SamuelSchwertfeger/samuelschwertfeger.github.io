@@ -9,6 +9,6 @@
   year: 2026
   summary: >-
     Undergraduate research at Georgia Southern University, advised by Dr. Hayden Wimmer.
-    Built a Splunk and Snort lab, ran a multi-stage attack against it, and validated detections
-    at each stage against NIST SP 800-53 Audit and Accountability and Incident Response controls.
+    Built a Splunk and Snort lab, ran a multi-stage attack against it, and verified that detections
+    fired at each stage. Mapped the project to NIST SP 800-53 Audit and Accountability and Incident Response controls.
   tags: [Splunk, Snort, NIST SP 800-53]

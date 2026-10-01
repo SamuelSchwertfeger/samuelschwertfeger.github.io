@@ -12,7 +12,7 @@ layout: default
         <p class="eyebrow"><span class="dot" aria-hidden="true"></span>First-year Ph.D. student · Augusta University</p>
       </div>
       <h1>Samuel Schwertfeger</h1>
-      <p class="lead">I study how local language models can tell a machine owner's everyday changes apart from an attacker's persistence on Linux. I am also a U.S. Army Cyber officer.</p>
+      <p class="lead">I study how local language models can tell a machine owner's everyday changes apart from an attacker's persistence on Linux. I also serve as a Cyber officer in the U.S. Army National Guard.</p>
       <p class="buttons">
         <a class="btn" href="#research">See my research</a>
         <a class="btn btn-ghost" href="{{ '/cv/' | relative_url }}">CV</a>
@@ -52,6 +52,7 @@ layout: default
   <p class="prose reveal">{{ r.summary }}</p>
   <figure class="figure reveal" id="pipe-fig">
     {% include pipeline.html %}
+    <figcaption>Proposed approach</figcaption>
   </figure>
   <p class="tags reveal">{% for i in r.interests %}<span>{{ i }}</span>{% endfor %}</p>
 </section>
@@ -68,16 +69,16 @@ layout: default
       {% for e in r.examples %}
       <button role="tab" type="button" id="tab-{{ forloop.index }}" aria-controls="ex-{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ e.mechanism }}</button>
       {% endfor %}
-      <span class="ex-score" id="ex-score" aria-live="polite"></span>
     </div>
+    <p class="ex-score" id="ex-score" aria-live="polite"></p>
 
     {% for e in r.examples %}
     {% assign path = e.technique | replace: '.', '/' %}
-    <div class="ex-panel" role="tabpanel" id="ex-{{ forloop.index }}" aria-labelledby="tab-{{ forloop.index }}"{% unless forloop.first %} hidden{% endunless %}>
+    <div class="ex-panel" role="tabpanel" id="ex-{{ forloop.index }}" aria-labelledby="tab-{{ forloop.index }}">
       {% for c in e.cases %}
       <article class="case" data-kind="{{ c.kind }}">
         <p class="case-label">A change appears on the host <a class="tech" href="https://attack.mitre.org/techniques/{{ path }}/">MITRE ATT&amp;CK {{ e.technique }}</a></p>
-        <div class="code"><span class="code-path">{{ c.path }}</span><code>{{ c.line }}</code></div>
+        <div class="code"><span class="code-path">{{ c.path }}</span><code>{{ c.line | escape }}</code></div>
         <div class="choices">
           <span class="choices-q">Who made it?</span>
           <button type="button" class="choice" data-pick="user">User change</button>

@@ -1,6 +1,7 @@
 (function () {
   'use strict';
   var root = document.documentElement;
+  root.classList.add('js');
   var reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function (s, el) { return (el || document).querySelector(s); };
   var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
@@ -61,7 +62,9 @@
     b.addEventListener('click', function () {
       var label = b.textContent;
       var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = label; }, 1600); };
-      if (navigator.clipboard) navigator.clipboard.writeText(b.getAttribute('data-copy')).then(done, function () {});
+      var fail = function () { b.textContent = b.getAttribute('data-copy'); };
+      if (navigator.clipboard) navigator.clipboard.writeText(b.getAttribute('data-copy')).then(done, fail);
+      else fail();
     });
   });
 
@@ -82,7 +85,7 @@
     var go = function (id) { var el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }); };
     var cmds = {
       help: function () { line('commands: whoami  research  play  path  projects  cv  contact  github  theme  clear', 'o'); },
-      whoami: function () { line('Samuel Schwertfeger. First-year Ph.D. student in Computer &amp; Cyber Sciences at Augusta University, and U.S. Army Cyber officer.', 'o'); },
+      whoami: function () { line('Samuel Schwertfeger. First-year Ph.D. student in Computer &amp; Cyber Sciences at Augusta University, and Cyber officer in the U.S. Army National Guard.', 'o'); },
       research: function () { line(esc(site.title || ''), 'o'); line('→ scrolling to Research', 'o'); go('research'); },
       play: function () { line('→ opening "You make the call"', 'o'); go('explore'); },
       path: function () { line('→ scrolling to Path', 'o'); go('path'); },
@@ -105,7 +108,7 @@
       line('<span class="pr">$</span>' + esc(raw));
       var name = raw.split(/\s+/)[0].toLowerCase();
       if (name === 'cat' || name === 'cd') name = (raw.split(/\s+/)[1] || '').replace(/[\/.].*$/, '').toLowerCase() || name;
-      (cmds[name] || function () { line('command not found: ' + esc(raw.split(/\s+/)[0]) + '. Type help.', 'o'); })();
+      (Object.prototype.hasOwnProperty.call(cmds, name) ? cmds[name] : function () { line('command not found: ' + esc(raw.split(/\s+/)[0]) + '. Type help.', 'o'); })();
       out.scrollTop = out.scrollHeight;
     });
     input.addEventListener('keydown', function (e) {
@@ -148,8 +151,11 @@
       t.addEventListener('keydown', function (e) {
         if (e.key === 'ArrowRight') select((i + 1) % tabs.length, true);
         if (e.key === 'ArrowLeft') select((i - 1 + tabs.length) % tabs.length, true);
+        if (e.key === 'Home') { e.preventDefault(); select(0, true); }
+        if (e.key === 'End') { e.preventDefault(); select(tabs.length - 1, true); }
       });
     });
+    select(0);
 
     $$('.case', ex).forEach(function (c) {
       $$('.choice', c).forEach(function (b) {

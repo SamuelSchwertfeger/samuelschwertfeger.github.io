@@ -63,7 +63,7 @@ path:
   - year: "2026"
     title: Undergraduate research
     org: Georgia Southern University
-    text: Built a SIEM/IDS lab and validated detections against NIST SP 800-53.
+    text: Built a SIEM/IDS lab, verified detections across a multi-stage attack, and mapped it to NIST SP 800-53.
   - year: "2026"
     title: Graduated magna cum laude, commissioned
     org: Georgia Southern University · U.S. Army National Guard
