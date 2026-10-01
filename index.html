@@ -2,58 +2,128 @@
 layout: default
 ---
 {% assign r = site.data.research %}
-<section class="hero">
+{% assign cv = site.data.cv %}
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="wrap hero-inner">
-    <img class="avatar" src="{{ site.avatar }}" alt="Samuel Schwertfeger" width="168" height="168">
-    <div>
-      <p class="kicker">$ whoami</p>
+    <div class="hero-text">
+      <div class="hero-id">
+        <img class="avatar" src="{{ site.avatar }}" alt="Portrait of Samuel Schwertfeger" width="88" height="88">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>First-year Ph.D. student · Augusta University</p>
+      </div>
       <h1>Samuel Schwertfeger</h1>
-      <p class="lead">First-year Ph.D. student in Computer and Cyber Sciences at Augusta University and U.S. Army Cyber officer.</p>
-      <p class="hero-topic">Machine-aware local language models for Linux persistence detection</p>
+      <p class="lead">I study how local language models can tell a machine owner's everyday changes apart from an attacker's persistence on Linux. I am also a U.S. Army Cyber officer.</p>
       <p class="buttons">
-        <a class="btn" href="mailto:{{ site.email }}">Email</a>
+        <a class="btn" href="#research">See my research</a>
         <a class="btn btn-ghost" href="{{ '/cv/' | relative_url }}">CV</a>
-        <a class="btn btn-ghost" href="https://github.com/{{ site.github }}">GitHub</a>
+        <a class="btn btn-ghost" href="mailto:{{ site.email }}">Email</a>
       </p>
+    </div>
+
+    <div class="term" aria-label="Interactive terminal">
+      <div class="term-bar" aria-hidden="true"><span></span><span></span><span></span><em>samuel@augusta: ~</em></div>
+      <div class="term-body" id="term-out" aria-live="polite">
+        <p><span class="pr">$</span> whoami</p>
+        <p class="o">Samuel Schwertfeger, Ph.D. student in Computer &amp; Cyber Sciences</p>
+        <p><span class="pr">$</span> cat research.txt</p>
+        <p class="o">Machine-aware local LLMs for Linux persistence detection</p>
+        <p class="o hint">Type <b>help</b> to explore.</p>
+      </div>
+      <form class="term-in" id="term-form" autocomplete="off">
+        <label for="term-cmd" class="pr">$</label>
+        <input id="term-cmd" type="text" spellcheck="false" aria-label="Terminal command, type help" placeholder="help">
+      </form>
     </div>
   </div>
 </section>
 
-<section id="research" class="wrap">
-  <h2>Research</h2>
-  <h3 class="title">{{ r.title }}</h3>
-  <p>{{ r.summary }}</p>
-  <figure class="figure">
-    <img loading="lazy" src="{{ '/assets/img/pipeline.svg' | relative_url }}" alt="Research pipeline: Linux host, detected changes, machine-aware local LLM with machine context, classified as user change or attacker persistence">
+<section class="wrap glance reveal" aria-label="At a glance">
+  <div class="g"><p class="g-k">Now</p><p class="g-v">Ph.D. student</p><p class="g-s">Augusta University, 2026 –</p></div>
+  <div class="g"><p class="g-k">Focus</p><p class="g-v">Linux persistence</p><p class="g-s">Local LLMs for host intrusion detection</p></div>
+  <div class="g"><p class="g-k">Service</p><p class="g-v">Army Cyber officer</p><p class="g-s">U.S. Army National Guard</p></div>
+  <div class="g"><p class="g-k">B.S.</p><p class="g-v">Magna cum laude</p><p class="g-s">Information Technology, Georgia Southern</p></div>
+</section>
+
+<section id="research" class="wrap section">
+  <header class="sec-head reveal">
+    <p class="kicker">01 · Research</p>
+    <h2>{{ r.title }}</h2>
+  </header>
+  <p class="prose reveal">{{ r.summary }}</p>
+  <figure class="figure reveal" id="pipe-fig">
+    {% include pipeline.html %}
   </figure>
+  <p class="tags reveal">{% for i in r.interests %}<span>{{ i }}</span>{% endfor %}</p>
+</section>
 
-  <h3>The problem in one table</h3>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Mechanism</th><th>MITRE ATT&amp;CK</th><th>Routine user change</th><th>Attacker persistence</th></tr></thead>
-      <tbody>
+<section id="explore" class="wrap section">
+  <header class="sec-head reveal">
+    <p class="kicker">02 · You make the call</p>
+    <h2>User change or attacker persistence?</h2>
+    <p class="muted">Both look like ordinary configuration changes. Make your call, then see what the machine's history says.</p>
+  </header>
+
+  <div class="explorer reveal" id="explorer">
+    <div class="ex-tabs" role="tablist" aria-label="Persistence mechanism">
       {% for e in r.examples %}
-        {% assign path = e.technique | replace: '.', '/' %}
-        <tr>
-          <td>{{ e.mechanism }}</td>
-          <td><a href="https://attack.mitre.org/techniques/{{ path }}/">{{ e.technique }}</a></td>
-          <td>{{ e.user }}</td>
-          <td>{{ e.attacker }}</td>
-        </tr>
+      <button role="tab" type="button" id="tab-{{ forloop.index }}" aria-controls="ex-{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ e.mechanism }}</button>
       {% endfor %}
-      </tbody>
-    </table>
-  </div>
+      <span class="ex-score" id="ex-score" aria-live="polite"></span>
+    </div>
 
-  <p class="tags">{% for i in r.interests %}<span>{{ i }}</span>{% endfor %}</p>
+    {% for e in r.examples %}
+    {% assign path = e.technique | replace: '.', '/' %}
+    <div class="ex-panel" role="tabpanel" id="ex-{{ forloop.index }}" aria-labelledby="tab-{{ forloop.index }}"{% unless forloop.first %} hidden{% endunless %}>
+      {% for c in e.cases %}
+      <article class="case" data-kind="{{ c.kind }}">
+        <p class="case-label">A change appears on the host <a class="tech" href="https://attack.mitre.org/techniques/{{ path }}/">MITRE ATT&amp;CK {{ e.technique }}</a></p>
+        <div class="code"><span class="code-path">{{ c.path }}</span><code>{{ c.line }}</code></div>
+        <div class="choices">
+          <span class="choices-q">Who made it?</span>
+          <button type="button" class="choice" data-pick="user">User change</button>
+          <button type="button" class="choice" data-pick="attacker">Attacker persistence</button>
+        </div>
+        <div class="answer">
+          <p class="verdict {{ c.kind }}"><span class="v-result"></span>{% if c.kind == 'user' %}User change{% else %}Attacker persistence{% endif %}</p>
+          <p class="ctx-title">What the machine knows</p>
+          <ul class="ctx">{% for x in c.context %}<li>{{ x }}</li>{% endfor %}</ul>
+          <p class="why">{{ c.why }}</p>
+          <button type="button" class="next">Next example →</button>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% endfor %}
+    <p class="fine">Illustrative examples of the problem, not output from a trained model.</p>
+  </div>
+</section>
+
+<section id="path" class="wrap section">
+  <header class="sec-head reveal">
+    <p class="kicker">03 · Path</p>
+    <h2>How I got here</h2>
+  </header>
+  <ol class="timeline">
+    {% for p in cv.path %}
+    <li class="reveal{% if p.now %} now{% endif %}">
+      <span class="t-year">{{ p.year }}{% if p.now %} · now{% endif %}</span>
+      <h3>{{ p.title }}</h3>
+      <p class="t-org">{{ p.org }}</p>
+      <p>{{ p.text }}</p>
+    </li>
+    {% endfor %}
+  </ol>
 </section>
 
 {% if site.data.publications.size > 0 %}
-<section id="publications" class="wrap">
-  <h2>Publications</h2>
-  <ul class="list">
+<section id="publications" class="wrap section">
+  <header class="sec-head reveal">
+    <p class="kicker">Publications</p>
+    <h2>Publications</h2>
+  </header>
+  <ul class="pubs">
   {% for p in site.data.publications %}
-    <li>
+    <li class="reveal">
       <strong>{% if p.url %}<a href="{{ p.url }}">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}</strong><br>
       <span class="muted">{{ p.authors }} · <em>{{ p.venue }}</em>, {{ p.year }}</span>
     </li>
@@ -62,21 +132,36 @@ layout: default
 </section>
 {% endif %}
 
-<section id="projects" class="wrap">
-  <h2>Projects</h2>
+<section id="projects" class="wrap section">
+  <header class="sec-head reveal">
+    <p class="kicker">04 · Projects</p>
+    <h2>Projects</h2>
+  </header>
   <div class="cards">
   {% for p in site.data.projects %}
-    <article class="card">
-      <h3>{% if p.url %}<a href="{{ p.url }}">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}</h3>
+    <article class="card reveal">
+      <p class="card-year">{{ p.year }}</p>
+      <h3>{% if p.url %}<a class="stretch" href="{{ p.url }}">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}</h3>
       <p>{{ p.summary }}</p>
-      {% if p.url %}<p class="more"><a href="{{ p.url }}">View on GitHub →</a></p>{% endif %}
       <p class="tags">{% for t in p.tags %}<span>{{ t }}</span>{% endfor %}</p>
+      {% if p.url %}<p class="more" aria-hidden="true">View on GitHub <span>→</span></p>{% endif %}
     </article>
   {% endfor %}
   </div>
 </section>
 
-<section id="contact" class="wrap">
-  <h2>Contact</h2>
-  <p>I am happy to talk about research, collaboration, or questions about this work: <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+<section id="contact" class="wrap section">
+  <div class="contact reveal">
+    <div>
+      <p class="kicker">05 · Contact</p>
+      <h2>Let's talk research</h2>
+      <p class="muted">I'm happy to discuss collaboration, Linux security, or questions about this work.</p>
+    </div>
+    <div class="contact-actions">
+      <a class="btn" href="mailto:{{ site.email }}">{{ site.email }}</a>
+      <button type="button" class="btn btn-ghost copy" data-copy="{{ site.email }}">Copy email</button>
+    </div>
+  </div>
 </section>
+
+<script id="site-data" type="application/json">{"email": {{ site.email | jsonify }}, "github": {{ site.github | jsonify }}, "title": {{ r.title | jsonify }}, "cv": {{ '/cv/' | relative_url | jsonify }}}</script>

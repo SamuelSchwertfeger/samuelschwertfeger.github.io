@@ -1,11 +1,16 @@
 ---
 layout: default
 title: CV
+description: Curriculum vitae of Samuel Schwertfeger, Ph.D. student in Computer and Cyber Sciences at Augusta University.
 ---
 {% assign cv = site.data.cv %}
 <section class="wrap page">
-  <h1>Curriculum Vitae</h1>
-  <p class="muted">Samuel Schwertfeger · <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+  <header class="page-head">
+    <p class="kicker">Curriculum Vitae</p>
+    <h1>Samuel Schwertfeger</h1>
+    <p class="muted">Ph.D. Student · Computer &amp; Cyber Sciences · Augusta University · <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+    <p class="print"><button type="button" class="btn btn-line" onclick="window.print()">Print or save as PDF</button></p>
+  </header>
 
   <h2>Education</h2>
   <ul class="cv">
@@ -14,7 +19,8 @@ title: CV
   {% endfor %}
   </ul>
 
-  <h2>Research Interests</h2>
+  <h2>Research</h2>
+  <p><strong>{{ site.data.research.title }}</strong></p>
   <p class="tags">{% for i in site.data.research.interests %}<span>{{ i }}</span>{% endfor %}</p>
 
   <h2>Experience</h2>

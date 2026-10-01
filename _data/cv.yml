@@ -53,3 +53,23 @@ skills:
     items: Splunk, Snort, Wireshark, Nmap, Kali Linux, Metasploit, Autopsy, pfSense
   - area: Infrastructure
     items: VMware, Linux (Ubuntu, Fedora), Windows Server, Cisco networking
+
+# "Path" timeline on the home page, oldest first. `now: true` highlights the current step.
+path:
+  - year: "2022"
+    title: Started undergraduate studies
+    org: Georgia Southern University
+    text: B.S. in Information Technology with a minor in Military Science, through Army ROTC.
+  - year: "2026"
+    title: Undergraduate research
+    org: Georgia Southern University
+    text: Built a SIEM/IDS lab and validated detections against NIST SP 800-53.
+  - year: "2026"
+    title: Graduated magna cum laude, commissioned
+    org: Georgia Southern University · U.S. Army National Guard
+    text: B.S. and Cyber Security Certificate; commissioned as an officer in the Cyber Branch.
+  - year: "2026"
+    title: Began the Ph.D.
+    org: Augusta University
+    text: Computer and Cyber Sciences. Researching local language models for Linux intrusion detection.
+    now: true

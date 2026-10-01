@@ -1,0 +1,48 @@
+<svg class="pipe" viewBox="0 0 1200 360" role="img" aria-labelledby="pipe-title">
+  <title id="pipe-title">Research pipeline: a Linux host's detected changes go to a machine-aware local language model, which uses machine context to classify each change as a user change or attacker persistence</title>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="m-arrow"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="m-blue"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="m-green"/></marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="m-red"/></marker>
+  </defs>
+  <g text-anchor="middle">
+    <g class="node">
+      <rect x="30" y="112" width="220" height="96" rx="12"/>
+      <text x="140" y="153" class="t1">Linux host</text>
+      <text x="140" y="179" class="t2">services · cron · SSH keys · shells</text>
+    </g>
+    <path class="flow" d="M250,160 L298,160" marker-end="url(#ah)"/>
+    <g class="node">
+      <rect x="300" y="112" width="220" height="96" rx="12"/>
+      <text x="410" y="153" class="t1">Detected changes</text>
+      <text x="410" y="179" class="t2">diff against a known baseline</text>
+    </g>
+    <path class="flow" d="M520,160 L568,160" marker-end="url(#ah)"/>
+    <g class="node llm">
+      <rect x="570" y="112" width="250" height="96" rx="12"/>
+      <text x="695" y="153" class="t1">Machine-aware local LLM</text>
+      <text x="695" y="179" class="t2">reasons about each change</text>
+    </g>
+    <g class="node ctx">
+      <rect x="570" y="252" width="250" height="78" rx="12"/>
+      <text x="695" y="285" class="t1 small">Machine context</text>
+      <text x="695" y="309" class="t2 small">package history · admin activity</text>
+    </g>
+    <path class="flow blue" d="M695,252 L695,210" marker-end="url(#ab)"/>
+    <path class="flow green b-user" d="M820,160 C850,160 850,92 878,92" marker-end="url(#ag)"/>
+    <path class="flow red b-att" d="M820,160 C850,160 850,228 878,228" marker-end="url(#ar)"/>
+    <g class="node out user b-user">
+      <rect x="880" y="54" width="290" height="76" rx="12"/>
+      <rect x="880" y="54" width="6" height="76" rx="3" class="bar"/>
+      <text x="1028" y="87" class="t1">User change</text>
+      <text x="1028" y="111" class="t2">expected, explained, allowed</text>
+    </g>
+    <g class="node out att b-att">
+      <rect x="880" y="190" width="290" height="76" rx="12"/>
+      <rect x="880" y="190" width="6" height="76" rx="3" class="bar"/>
+      <text x="1028" y="223" class="t1">Attacker persistence</text>
+      <text x="1028" y="247" class="t2">flagged with evidence for the analyst</text>
+    </g>
+  </g>
+</svg>
