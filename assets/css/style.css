@@ -328,3 +328,5 @@ footer { margin-top: 112px; border-top: 1px solid var(--line); background: var(-
   footer { margin-top: 24pt; border: 0; background: none; }
   .js .reveal { opacity: 1; transform: none; }
 }
+
+.page-head .muted a { text-decoration: underline; text-underline-offset: 3px; }
