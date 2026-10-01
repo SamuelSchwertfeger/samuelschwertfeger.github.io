@@ -1,0 +1,99 @@
+:root {
+  --navy: #0A1F3C;
+  --navy-2: #14365E;
+  --accent: #2F81F7;
+  --text: #1F2328;
+  --muted: #57606A;
+  --line: #D0D7DE;
+  --bg: #FFFFFF;
+  --soft: #F6F8FA;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #E6EDF3;
+    --muted: #9198A1;
+    --line: #30363D;
+    --bg: #0D1117;
+    --soft: #161B22;
+    --accent: #58A6FF;
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body {
+  margin: 0;
+  font: 17px/1.65 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+.muted { color: var(--muted); }
+.small { font-size: 14px; }
+
+/* Nav */
+.nav { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--line); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.brand { font-weight: 700; color: var(--text); }
+.nav nav a { margin-left: 22px; color: var(--muted); font-size: 15px; }
+.nav nav a:hover, .nav nav a[aria-current] { color: var(--text); text-decoration: none; }
+
+/* Hero */
+.hero { background: linear-gradient(135deg, var(--navy), var(--navy-2)); color: #fff; padding: 64px 0; }
+.hero-inner { display: flex; gap: 40px; align-items: center; }
+.avatar { width: 168px; height: 168px; border-radius: 50%; border: 4px solid rgba(255,255,255,.15); flex-shrink: 0; }
+.kicker { margin: 0; font-family: SFMono-Regular, Consolas, "Liberation Mono", monospace; font-size: 15px; color: #7FB2F0; }
+.hero h1 { margin: 4px 0 8px; font-size: 44px; line-height: 1.15; }
+.lead { margin: 0; color: #C9D6E8; font-size: 19px; }
+.hero-topic { margin: 14px 0 0; padding-top: 14px; border-top: 3px solid #4FA3FF; display: inline-block; color: #8EC2FF; }
+.buttons { margin: 24px 0 0; display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { padding: 8px 18px; border-radius: 6px; background: #fff; color: var(--navy); font-weight: 600; font-size: 15px; }
+.btn:hover { text-decoration: none; opacity: .9; }
+.btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.4); }
+
+/* Sections */
+section.wrap { padding-top: 56px; }
+h2 { font-size: 26px; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 19px; margin: 28px 0 8px; }
+h3.title { margin-top: 0; }
+.figure { margin: 28px 0; }
+.figure img { width: 100%; height: auto; border-radius: 14px; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { background: var(--soft); font-weight: 600; }
+
+/* Tags */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0; }
+.tags span { font-size: 13px; padding: 3px 12px; border-radius: 999px; background: var(--soft); border: 1px solid var(--line); color: var(--muted); }
+
+/* Cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.card { border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; background: var(--soft); }
+.card h3 { margin-top: 0; }
+.card p { margin: 0 0 8px; font-size: 15px; }
+
+/* Lists / CV */
+.list { padding-left: 20px; }
+.list li { margin-bottom: 12px; }
+.page h1 { font-size: 36px; margin: 0 0 4px; }
+.page h2 { margin-top: 40px; }
+.cv { list-style: none; padding: 0; margin: 0; }
+.cv li { display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.cv .year { color: var(--muted); white-space: nowrap; font-size: 15px; }
+
+/* Footer */
+footer { margin-top: 72px; padding: 28px 0; border-top: 1px solid var(--line); text-align: center; font-size: 15px; }
+footer p { margin: 4px 0; }
+
+@media (max-width: 680px) {
+  .hero-inner { flex-direction: column; text-align: center; }
+  .buttons { justify-content: center; }
+  .hero h1 { font-size: 34px; }
+  .nav nav a { margin-left: 14px; }
+  .brand { font-size: 15px; }
+}

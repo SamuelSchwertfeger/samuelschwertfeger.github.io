@@ -1,0 +1,32 @@
+title: "Machine-Aware Local Language Models: Separating User Changes from Attacker Persistence on Linux"
+summary: >-
+  A new systemd service, cron job, or SSH key can be a routine change by the machine's owner
+  or an attacker making sure they can get back in. Rule-based tools often flag both the same way.
+  My research asks whether a local language model that knows the machine, including its package
+  history and admin activity, can tell the two apart and explain its reasoning.
+
+# Shown as a table on the home page. Technique IDs link to MITRE ATT&CK.
+examples:
+  - mechanism: Cron job
+    technique: T1053.003
+    user: Nightly backup script
+    attacker: Reverse shell every 5 minutes
+  - mechanism: systemd service
+    technique: T1543.002
+    user: New web server after install
+    attacker: Disguised service that runs a payload at boot
+  - mechanism: SSH authorized keys
+    technique: T1098.004
+    user: Admin adds a laptop's key
+    attacker: Unknown key added to root
+  - mechanism: Shell configuration
+    technique: T1546.004
+    user: Alias added to .bashrc
+    attacker: Command in .bashrc that calls home on login
+
+interests:
+  - Host-based intrusion detection
+  - Local language models for security
+  - Linux persistence
+  - Explainable AI
+  - Defensive cyber operations

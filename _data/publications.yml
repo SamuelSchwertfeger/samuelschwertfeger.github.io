@@ -1,0 +1,8 @@
+# Newest first. The Publications section appears on the site once this list has an entry.
+# Example:
+# - title: Paper title
+#   authors: S. Schwertfeger, A. Coauthor
+#   venue: Conference or journal
+#   year: 2027
+#   url: https://doi.org/...
+[]

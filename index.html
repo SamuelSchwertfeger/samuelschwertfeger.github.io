@@ -1,0 +1,81 @@
+---
+layout: default
+---
+{% assign r = site.data.research %}
+<section class="hero">
+  <div class="wrap hero-inner">
+    <img class="avatar" src="{{ site.avatar }}" alt="Samuel Schwertfeger" width="168" height="168">
+    <div>
+      <p class="kicker">$ whoami</p>
+      <h1>Samuel Schwertfeger</h1>
+      <p class="lead">First-year Ph.D. student in Computer and Cyber Sciences at Augusta University and U.S. Army Cyber officer.</p>
+      <p class="hero-topic">Machine-aware local language models for Linux persistence detection</p>
+      <p class="buttons">
+        <a class="btn" href="mailto:{{ site.email }}">Email</a>
+        <a class="btn btn-ghost" href="{{ '/cv/' | relative_url }}">CV</a>
+        <a class="btn btn-ghost" href="https://github.com/{{ site.github }}">GitHub</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="research" class="wrap">
+  <h2>Research</h2>
+  <h3 class="title">{{ r.title }}</h3>
+  <p>{{ r.summary }}</p>
+  <figure class="figure">
+    <img src="{{ '/assets/img/pipeline.svg' | relative_url }}" alt="Research pipeline: Linux host, detected changes, machine-aware local LLM with machine context, classified as user change or attacker persistence">
+  </figure>
+
+  <h3>The problem in one table</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Mechanism</th><th>MITRE ATT&amp;CK</th><th>Routine user change</th><th>Attacker persistence</th></tr></thead>
+      <tbody>
+      {% for e in r.examples %}
+        {% assign path = e.technique | replace: '.', '/' %}
+        <tr>
+          <td>{{ e.mechanism }}</td>
+          <td><a href="https://attack.mitre.org/techniques/{{ path }}/">{{ e.technique }}</a></td>
+          <td>{{ e.user }}</td>
+          <td>{{ e.attacker }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <p class="tags">{% for i in r.interests %}<span>{{ i }}</span>{% endfor %}</p>
+</section>
+
+{% if site.data.publications.size > 0 %}
+<section id="publications" class="wrap">
+  <h2>Publications</h2>
+  <ul class="list">
+  {% for p in site.data.publications %}
+    <li>
+      <strong>{% if p.url %}<a href="{{ p.url }}">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}</strong><br>
+      <span class="muted">{{ p.authors }} · <em>{{ p.venue }}</em>, {{ p.year }}</span>
+    </li>
+  {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+<section id="projects" class="wrap">
+  <h2>Projects</h2>
+  <div class="cards">
+  {% for p in site.data.projects %}
+    <article class="card">
+      <h3>{% if p.url %}<a href="{{ p.url }}">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}</h3>
+      <p>{{ p.summary }}</p>
+      <p class="tags">{% for t in p.tags %}<span>{{ t }}</span>{% endfor %}</p>
+    </article>
+  {% endfor %}
+  </div>
+</section>
+
+<section id="contact" class="wrap">
+  <h2>Contact</h2>
+  <p>I am happy to talk about research, collaboration, or questions about this work: <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+</section>

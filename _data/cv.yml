@@ -1,0 +1,55 @@
+education:
+  - degree: Ph.D., Computer and Cyber Sciences
+    school: Augusta University
+    years: 2026 – present
+  - degree: B.S., Information Technology, minor in Military Science
+    school: Georgia Southern University
+    years: 2026
+    note: Magna cum laude
+  - degree: Cyber Security Certificate
+    school: Georgia Southern University
+    years: 2026
+
+experience:
+  - role: Commissioned Officer, Cyber Branch
+    org: U.S. Army National Guard
+    years: 2026 – present
+  - role: Research Assistant (Internship)
+    org: Georgia Southern University, School of Engineering and Computing
+    years: 2026
+    note: Designed, built, and documented a SIEM/IDS lab aligned to NIST SP 800-53.
+
+honors:
+  - name: Magna Cum Laude
+    org: Georgia Southern University
+    years: "2026"
+  - name: Military Order of the World Wars Bronze Medal of Merit
+    org: Army ROTC, Georgia Southern University
+    years: "2023"
+  - name: Cone Scholarship
+    org: Georgia Southern University
+    years: "2023"
+  - name: HOPE Scholarship
+    org: State of Georgia
+    years: 2022 – 2026
+  - name: President's List and Dean's List
+    org: Georgia Southern University
+    years: 2023 – 2025
+
+conferences:
+  - name: IEEE Conference on Virtual Reality and 3D User Interfaces (IEEE VR)
+    years: "2026"
+  - name: Hawaii International Conference on System Sciences (HICSS)
+    years: "2026"
+  - name: AFCEA TechNet Augusta (volunteer)
+    years: "2025"
+
+skills:
+  - area: Languages
+    items: Python, Bash
+  - area: ML / XAI
+    items: scikit-learn, pandas, NumPy, SHAP, LIME
+  - area: Security
+    items: Splunk, Snort, Wireshark, Nmap, Kali Linux, Metasploit, Autopsy, pfSense
+  - area: Infrastructure
+    items: VMware, Linux (Ubuntu, Fedora), Windows Server, Cisco networking

@@ -1,0 +1,12 @@
+title: Samuel Schwertfeger
+description: Ph.D. student in Computer and Cyber Sciences at Augusta University. Machine-aware local language models for Linux persistence detection.
+url: https://samuelschwertfeger.github.io
+email: sschwertfeger@augusta.edu
+github: SamuelSchwertfeger
+avatar: https://avatars.githubusercontent.com/u/113480134?s=400
+
+plugins:
+  - jekyll-seo-tag
+
+exclude:
+  - README.md

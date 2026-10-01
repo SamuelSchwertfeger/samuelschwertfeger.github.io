@@ -1,0 +1,14 @@
+# Newest first. `url` is optional.
+- name: "XAI for Intrusion Detection: Reading List"
+  url: https://github.com/SamuelSchwertfeger/xai-intrusion-detection-papers
+  year: 2026
+  summary: A curated, verified list of papers on explainable AI for intrusion detection.
+  tags: [Explainable AI, Intrusion Detection]
+
+- name: SIEM/IDS Detection Lab
+  year: 2026
+  summary: >-
+    Undergraduate research at Georgia Southern University, advised by Dr. Hayden Wimmer.
+    Built a Splunk and Snort lab, ran a multi-stage attack against it, and validated detections
+    at each stage against NIST SP 800-53 Audit and Accountability and Incident Response controls.
+  tags: [Splunk, Snort, NIST SP 800-53]

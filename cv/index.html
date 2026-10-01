@@ -1,0 +1,56 @@
+---
+layout: default
+title: CV
+---
+{% assign cv = site.data.cv %}
+<section class="wrap page">
+  <h1>Curriculum Vitae</h1>
+  <p class="muted">Samuel Schwertfeger · <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+
+  <h2>Education</h2>
+  <ul class="cv">
+  {% for e in cv.education %}
+    <li><div><strong>{{ e.degree }}</strong><br><span class="muted">{{ e.school }}{% if e.note %} · {{ e.note }}{% endif %}</span></div><span class="year">{{ e.years }}</span></li>
+  {% endfor %}
+  </ul>
+
+  <h2>Research Interests</h2>
+  <p class="tags">{% for i in site.data.research.interests %}<span>{{ i }}</span>{% endfor %}</p>
+
+  <h2>Experience</h2>
+  <ul class="cv">
+  {% for e in cv.experience %}
+    <li><div><strong>{{ e.role }}</strong><br><span class="muted">{{ e.org }}</span>{% if e.note %}<br>{{ e.note }}{% endif %}</div><span class="year">{{ e.years }}</span></li>
+  {% endfor %}
+  </ul>
+
+  {% if site.data.publications.size > 0 %}
+  <h2>Publications</h2>
+  <ul class="cv">
+  {% for p in site.data.publications %}
+    <li><div><strong>{{ p.title }}</strong><br><span class="muted">{{ p.authors }} · <em>{{ p.venue }}</em></span></div><span class="year">{{ p.year }}</span></li>
+  {% endfor %}
+  </ul>
+  {% endif %}
+
+  <h2>Honors and Awards</h2>
+  <ul class="cv">
+  {% for h in cv.honors %}
+    <li><div><strong>{{ h.name }}</strong><br><span class="muted">{{ h.org }}</span></div><span class="year">{{ h.years }}</span></li>
+  {% endfor %}
+  </ul>
+
+  <h2>Conferences Attended</h2>
+  <ul class="cv">
+  {% for c in cv.conferences %}
+    <li><div>{{ c.name }}</div><span class="year">{{ c.years }}</span></li>
+  {% endfor %}
+  </ul>
+
+  <h2>Skills</h2>
+  <ul class="cv">
+  {% for s in cv.skills %}
+    <li><div><strong>{{ s.area }}</strong><br><span class="muted">{{ s.items }}</span></div></li>
+  {% endfor %}
+  </ul>
+</section>
