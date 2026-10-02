@@ -1,7 +1,7 @@
-/* Fonts (self-hosted, SIL OFL 1.1 — see assets/fonts/LICENSE.md) */
-@font-face { font-family: "Inter"; src: url("../fonts/inter.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
-@font-face { font-family: "Source Serif 4"; src: url("../fonts/source-serif-4.woff2") format("woff2"); font-weight: 200 900; font-display: swap; }
-@font-face { font-family: "JetBrains Mono"; src: url("../fonts/jetbrains-mono.woff2") format("woff2"); font-weight: 100 800; font-display: swap; }
+/* Fonts (self-hosted, SIL OFL 1.1 — see static/assets/fonts/LICENSE.md) */
+@font-face { font-family: "Inter"; src: url("/assets/fonts/inter.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Fraunces"; src: url("/assets/fonts/fraunces.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("/assets/fonts/jetbrains-mono.woff2") format("woff2"); font-weight: 100 800; font-display: swap; }
 
 /* Palette: one source of truth for every color on the site */
 :root {
@@ -20,7 +20,7 @@
   --red: #CF222E;
   --red-soft: rgba(207, 34, 46, .09);
   --shadow: 0 1px 2px rgba(15, 23, 42, .06), 0 8px 24px rgba(15, 23, 42, .06);
-  --serif: "Source Serif 4", Charter, Georgia, serif;
+  --serif: "Fraunces", Charter, Georgia, serif;
   --sans: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   --mono: "JetBrains Mono", Consolas, "Liberation Mono", monospace;
   color-scheme: light;
@@ -52,7 +52,9 @@
 
 /* Base */
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+html { scroll-padding-top: 80px; }
+/* Smooth only for in-page jumps, not SvelteKit page navigations */
+html:focus-within { scroll-behavior: smooth; }
 body {
   margin: 0;
   font: 17px/1.7 var(--sans);
@@ -63,7 +65,7 @@ body {
 }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; }
-h1, h2, h3 { font-family: var(--serif); font-weight: 650; letter-spacing: -.01em; line-height: 1.2; }
+h1, h2, h3 { font-family: var(--serif); font-optical-sizing: auto; font-weight: 650; letter-spacing: -.01em; line-height: 1.2; }
 .wrap { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
 .muted { color: var(--muted); }
 .small { font-size: 14px; }
@@ -128,6 +130,7 @@ html:not(.js) .theme-toggle { display: none; }
 .term-bar span { width: 11px; height: 11px; border-radius: 50%; background: #2B3A52; }
 .term-bar em { margin-left: 8px; font-style: normal; font-size: 12px; color: #7F93AE; }
 .term-body { padding: 16px 18px 4px; height: 230px; overflow-y: auto; color: #DCE6F2; }
+.term-body { scrollbar-width: thin; scrollbar-color: rgba(127,178,240,.3) transparent; }
 .term-body p { margin: 0 0 2px; white-space: pre-wrap; word-break: break-word; }
 .term-body .o { color: #9FB4CE; }
 .term-body .hint b { color: #8EC2FF; font-weight: 600; }
@@ -291,7 +294,7 @@ footer { margin-top: 112px; border-top: 1px solid var(--line); background: var(-
 .js .reveal.in { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  html, html:focus-within { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .js .reveal { opacity: 1; transform: none; }
 }
@@ -303,7 +306,7 @@ footer { margin-top: 112px; border-top: 1px solid var(--line); background: var(-
   .brand-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }
 @media (max-width: 560px) {
-  .wrap { padding: 0 20px; }
+  .wrap { padding-left: 20px; padding-right: 20px; }
   .nav nav a { padding: 6px 8px; font-size: 14px; }
   .glance { grid-template-columns: 1fr; }
   .section { padding-top: 80px; }
