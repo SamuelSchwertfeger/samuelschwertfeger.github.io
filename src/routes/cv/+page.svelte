@@ -16,7 +16,7 @@
   <header class="page-head">
     <p class="kicker">Curriculum Vitae</p>
     <h1>Samuel Schwertfeger</h1>
-    <p class="muted">Ph.D. Student · Computer &amp; Cyber Sciences · Augusta University · <a href="mailto:{site.email}">{site.email}</a></p>
+    <p class="muted">Ph.D. Student · Computer &amp; Cyber Sciences · Augusta University · <a href="mailto:{site.email}">{site.email}</a> · <a href="https://github.com/{site.github}">github.com/{site.github}</a></p>
     <p class="print"><button type="button" class="btn btn-line" onclick={() => window.print()}>Print or save as PDF</button></p>
   </header>
 
