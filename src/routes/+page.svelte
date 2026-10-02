@@ -31,6 +31,7 @@
         <a class="btn" href="#research">See my research</a>
         <a class="btn btn-ghost" href="/cv/">CV</a>
         <a class="btn btn-ghost" href="mailto:{site.email}">Email</a>
+        <a class="btn btn-ghost" href="https://github.com/{site.github}">GitHub</a>
       </p>
     </div>
 
