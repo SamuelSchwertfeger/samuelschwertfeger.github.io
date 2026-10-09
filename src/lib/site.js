@@ -6,6 +6,7 @@ export const site = {
   url: 'https://samuelschwertfeger.github.io',
   email: 'sschwertfeger@augusta.edu',
   github: 'SamuelSchwertfeger',
+  linkedin: 'samuelschwertfeger',
   avatar: 'https://avatars.githubusercontent.com/u/113480134?s=400',
   image: '/assets/img/social.png'
 };
