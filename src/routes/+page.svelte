@@ -29,6 +29,8 @@
       <p class="lead">I study how local language models can tell a machine owner's everyday changes apart from an attacker's persistence on Linux. I also serve as a Cyber officer in the U.S. Army National Guard.</p>
       <p class="buttons">
         <a class="btn" href="#research">See my research</a>
+        <a class="btn btn-ghost" href="https://github.com/{site.github}">GitHub</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/{site.linkedin}">LinkedIn</a>
         <a class="btn btn-ghost" href="/cv/">CV</a>
         <a class="btn btn-ghost" href="mailto:{site.email}">Email</a>
       </p>

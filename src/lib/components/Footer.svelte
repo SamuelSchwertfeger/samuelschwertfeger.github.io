@@ -14,6 +14,7 @@
     <p class="footer-links">
       <a href="mailto:{site.email}">Email</a>
       <a href="https://github.com/{site.github}">GitHub</a>
+      <a href="https://www.linkedin.com/in/{site.linkedin}">LinkedIn</a>
       <a href="/cv/">CV</a>
     </p>
   </div>
