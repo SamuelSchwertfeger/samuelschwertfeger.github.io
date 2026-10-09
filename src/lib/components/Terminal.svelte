@@ -50,7 +50,7 @@
 
   /** @type {Record<string, () => void>} */
   const cmds = {
-    help: () => say('commands: whoami  research  play  path  projects  cv  contact  github  theme  clear'),
+    help: () => say('commands: whoami  research  play  path  projects  cv  contact  github  linkedin  theme  clear'),
     whoami: () =>
       say(
         'Samuel Schwertfeger. First-year Ph.D. student in Computer & Cyber Sciences at Augusta University, and Cyber officer in the U.S. Army National Guard.'
@@ -80,6 +80,8 @@
     email: () => cmds.contact(),
     github: () =>
       lines.push(mk('o', [{ href: 'https://github.com/' + site.github, t: 'github.com/' + site.github }])),
+    linkedin: () =>
+      lines.push(mk('o', [{ href: 'https://www.linkedin.com/in/' + site.linkedin, t: 'linkedin.com/in/' + site.linkedin }])),
     theme: () => say('theme: ' + toggleTheme()),
     ls: () => say('research/  path/  projects/  cv.txt  contact.txt'),
     clear: () => {
